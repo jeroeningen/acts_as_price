@@ -1,0 +1,46 @@
+=INSTALLATION
+rails plugin install git@github.com:jeroeningen/acts_as_price.git
+
+=USAGE
+In your model add the following:
+- acts_as_price <column_name>, :validates = true
+
+<column_name> is the name of your database column e.g. price or price_per_liter.
+
+This plugin creates the following getters and setters:
+- 'price_in_cents' and '<column_name>_in_cents' #sets and returns the price in cents
+- 'price' and '<column_name>' #sets and returns the price
+
+=EXAMPLES
+car = Car.new :price => 12999
+
+car.price #12999.00
+
+car.price_in_cents #1299900
+
+fuel = Fueltype.new :price_per_liter => 1.12
+
+fuel.price #1.12
+
+fuel.price_in_cents #112
+
+fuel.price_per_liter #1.12
+
+fuel.price_per_liter_in_cents #1.12
+
+=RSPEC INTERGRATION
+Acts As Price comes with a helper method to automatically test the plugin using Rspec.
+
+To use this method please add the following to your spec_helper.rb file:
+- config.include(ActsAsPriceHelper)
+Now you may add the following code to your spec-files for your models:
+  context "given an valid model" do
+    it "should acts as price" do
+      test_acts_as_price_methods <column_name>, <fixture or stub>
+    end
+  end
+ 
+
+=NOTES
+This plugin comes with Rspec tests. 
+However this plugin assumes that you have a database configuration, it actually don't use the database for the Rspec tests.
