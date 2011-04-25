@@ -11,6 +11,8 @@ In your model add the following:
 
 column_name is the name of your database column e.g. price or price_per_liter.
 
+validates is optional and add validation to the column
+
 This plugin creates the following getters and setters:
 - 'price_in_cents' and '<column_name>_in_cents' #sets and returns the price in cents
 - 'price' and '<column_name>' #sets and returns the price
