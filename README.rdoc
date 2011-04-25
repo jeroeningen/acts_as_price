@@ -39,8 +39,13 @@ Now you may add the following code to your spec-files for your models:
       test_acts_as_price_methods <column_name>, <fixture or stub>
     end
   end
- 
+
+=TESTING
+To test the plugin use the command 'rake test' or 'rspec spec/*_spec.rb' inside the dir '~/vendor/plugins/acts_as_price' 
 
 =NOTES
 This plugin comes with Rspec tests. 
 However this plugin assumes that you have a database configuration, it actually don't use the database for the Rspec tests.
+
+=FEEDBACK AND BUGS REPORTS
+For feedback and bug reports contact: jeroeningen@gmail.com

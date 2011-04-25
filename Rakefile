@@ -8,8 +8,8 @@ task :default => :test
 desc 'Test the acts_as_price plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
+  t.libs << 'spec'
+  t.pattern = 'spec/*_spec.rb'
   t.verbose = true
 end
 
@@ -18,6 +18,6 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'ActsAsPrice'
   rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include("README.rdoc")
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
