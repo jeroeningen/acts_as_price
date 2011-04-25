@@ -2,6 +2,10 @@
 rails plugin install git@github.com:jeroeningen/acts_as_price.git
 
 =USAGE
+Create a column in the table of your database which you want to acts as a price. 
+
+NOTE THAT THE COLUMN MUST BE OF THE TYPE INTEGER.
+
 In your model add the following:
 - acts_as_price <column_name>, :validates = true
 
