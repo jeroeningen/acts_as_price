@@ -7,9 +7,9 @@ Create a column in the table of your database which you want to acts as a price.
 NOTE THAT THE COLUMN MUST BE OF THE TYPE INTEGER.
 
 In your model add the following:
-- acts_as_price <column_name>, :validates = true
+- acts_as_price column_name, :validates = true
 
-<column_name> is the name of your database column e.g. price or price_per_liter.
+column_name is the name of your database column e.g. price or price_per_liter.
 
 This plugin creates the following getters and setters:
 - 'price_in_cents' and '<column_name>_in_cents' #sets and returns the price in cents
