@@ -24,7 +24,7 @@ describe Car do
     end
   end
   
-  context "return the fueltype price" do
+  context "return the price" do
     it "should return the price in cents" do
       columns_in_cents.each do |column|
         @acts_as_price_model.send(column).should == 2399599
@@ -37,16 +37,19 @@ describe Car do
     end
   end
   
-  context "set the price per liter" do
-    it "should set the price per liter in cents and return it correctly" do
-      test_setter_in_cents "2209998"
+  context "set the price for hundred different prices" do
+    2200000.upto(2200100) do |i|
+      it "should set the price in cents and return it correctly" do
+        test_setter_in_cents i.to_s
+      end
+      it "should set the price and return it correctly" do
+        test_setter_in_doubles sprintf("%.2f", i.to_f / 100)
+      end
     end
-    it "should set the price per liter and return it correctly" do
-      test_setter_in_doubles "25499.97"
-    end
+    
   end
   
-  context "given a float as price per liter" do
+  context "given a float as price" do
     it "should convert it to the right price in cents" do
       test_setter_in_doubles "25500.5"
       test_setter_in_doubles "21599.05"

@@ -37,12 +37,14 @@ describe Fueltype do
     end
   end
   
-  context "set the price per liter" do
-    it "should set the price per liter in cents and return it correctly" do
-      test_setter_in_cents "144"
-    end
-    it "should set the price per liter and return it correctly" do
-      test_setter_in_doubles "1.41"
+  context "set the price per liter for hundred different prices" do
+    1.upto(100).each do |i|
+      it "should set the price per liter in cents and return it correctly" do
+        test_setter_in_cents i.to_s
+      end
+      it "should set the price per liter and return it correctly" do
+        test_setter_in_doubles sprintf("%.2f", i.to_f / 100)
+      end
     end
   end
   

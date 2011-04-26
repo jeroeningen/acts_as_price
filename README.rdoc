@@ -49,6 +49,9 @@ Now you may add the following code to your spec-files for your models:
 =TESTING
 To test the plugin use the command 'rake test' or 'rspec spec/*_spec.rb' inside the dir '~/vendor/plugins/acts_as_price' 
 
+=KNOWN BUGS
+The acts_as_price plugin does not accept comma-seperated prices at the moment.
+
 =NOTES
 This plugin comes with Rspec tests. 
 However this plugin assumes that you have a database configuration, it actually don't use the database for the Rspec tests.
