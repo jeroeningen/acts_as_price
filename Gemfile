@@ -12,3 +12,6 @@ group :test do
 	gem 'metrical'
 	gem 'activerecord-nulldb-adapter'
 end
+group :development do
+	gem "jeweler", "~> 1.5.2"
+end
