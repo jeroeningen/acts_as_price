@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts_as_price}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeroen van Ingen"]
@@ -21,10 +21,25 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "acts_as_price.gemspec",
     "init.rb",
     "install.rb",
     "lib/acts_as_price.rb",
     "lib/acts_as_price_helper.rb",
+    "rdoc/classes/ActiveRecord.html",
+    "rdoc/classes/ActiveRecord/Acts.html",
+    "rdoc/classes/ActiveRecord/Acts/Price.html",
+    "rdoc/classes/ActiveRecord/Acts/Price/ClassMethods.html",
+    "rdoc/classes/ActsAsPriceHelper.html",
+    "rdoc/created.rid",
+    "rdoc/files/README_rdoc.html",
+    "rdoc/files/lib/acts_as_price_helper_rb.html",
+    "rdoc/files/lib/acts_as_price_rb.html",
+    "rdoc/fr_class_index.html",
+    "rdoc/fr_file_index.html",
+    "rdoc/fr_method_index.html",
+    "rdoc/index.html",
+    "rdoc/rdoc-style.css",
     "spec/car_spec.rb",
     "spec/fueltype_spec.rb",
     "spec/models/car.rb",
@@ -53,36 +68,33 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rails>, ["= 3.0.7"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_runtime_dependency(%q<rails>, ["= 3.0.7"])
-      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_development_dependency(%q<shoulda-matchers>, [">= 0"])
-      s.add_development_dependency(%q<autotest>, [">= 0"])
-      s.add_development_dependency(%q<autotest-growl>, [">= 0"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_development_dependency(%q<metrical>, [">= 0"])
-      s.add_development_dependency(%q<activerecord-nulldb-adapter>, [">= 0"])
+      s.add_development_dependency(%q<rspec-rails>, ["= 2.5.0"])
+      s.add_development_dependency(%q<shoulda-matchers>, ["= 1.0.0.beta2"])
+      s.add_development_dependency(%q<autotest>, ["= 4.4.6"])
+      s.add_development_dependency(%q<rcov>, ["= 0.9.9"])
+      s.add_development_dependency(%q<metrical>, ["= 0.0.5"])
+      s.add_development_dependency(%q<activerecord-nulldb-adapter>, ["= 0.2.1"])
     else
       s.add_dependency(%q<rails>, ["= 3.0.7"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rails>, ["= 3.0.7"])
-      s.add_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_dependency(%q<shoulda-matchers>, [">= 0"])
-      s.add_dependency(%q<autotest>, [">= 0"])
-      s.add_dependency(%q<autotest-growl>, [">= 0"])
-      s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<metrical>, [">= 0"])
-      s.add_dependency(%q<activerecord-nulldb-adapter>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, ["= 2.5.0"])
+      s.add_dependency(%q<shoulda-matchers>, ["= 1.0.0.beta2"])
+      s.add_dependency(%q<autotest>, ["= 4.4.6"])
+      s.add_dependency(%q<rcov>, ["= 0.9.9"])
+      s.add_dependency(%q<metrical>, ["= 0.0.5"])
+      s.add_dependency(%q<activerecord-nulldb-adapter>, ["= 0.2.1"])
     end
   else
     s.add_dependency(%q<rails>, ["= 3.0.7"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rails>, ["= 3.0.7"])
-    s.add_dependency(%q<rspec-rails>, [">= 0"])
-    s.add_dependency(%q<shoulda-matchers>, [">= 0"])
-    s.add_dependency(%q<autotest>, [">= 0"])
-    s.add_dependency(%q<autotest-growl>, [">= 0"])
-    s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<metrical>, [">= 0"])
-    s.add_dependency(%q<activerecord-nulldb-adapter>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, ["= 2.5.0"])
+    s.add_dependency(%q<shoulda-matchers>, ["= 1.0.0.beta2"])
+    s.add_dependency(%q<autotest>, ["= 4.4.6"])
+    s.add_dependency(%q<rcov>, ["= 0.9.9"])
+    s.add_dependency(%q<metrical>, ["= 0.0.5"])
+    s.add_dependency(%q<activerecord-nulldb-adapter>, ["= 0.2.1"])
   end
 end
 
