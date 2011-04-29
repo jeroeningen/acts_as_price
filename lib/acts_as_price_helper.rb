@@ -1,9 +1,14 @@
 module ActsAsPriceHelper
-  # Test the acts_as_price plugin for the specified column_name and model
-  #   
+  # Test the acts_as_price plugin for the specified column_name and given seperator.
+  # 
+  # Valid options:
+  # * model: Not just the model name, but a full object of the model
+  # 
+  # EXAMPLE:
+  # * test_acts_as_price_methods :price, ",", :model => @fuel
   # Note the you can also specify the model in a before block in your tests
-  def test_acts_as_price_methods column_name, acts_as_price_model = nil
-    @acts_as_price_model = acts_as_price_model if acts_as_price_model
+  def test_acts_as_price_methods column_name, seperator, options = {}
+    @acts_as_price_model = options[:model] if options[:model]
     
     @column_name = column_name
     columns_in_cents.each do |column|
@@ -14,20 +19,26 @@ module ActsAsPriceHelper
     end
     
     #normal test for setter
-    test_setter_in_cents "144"
-    test_setter_in_doubles "1.41"
+    test_setter_in_cents "144", seperator
+    test_setter_in_doubles "1.41", seperator
+    test_setter_in_doubles "1,41", seperator
     
     #test for special cases
     #test if 1.5 is returned as 1.50
-    test_setter_in_doubles "1.5"
+    test_setter_in_doubles "1.5", seperator
+    #test if 1,5 is returned as 1.50
+    test_setter_in_doubles "1,5", seperator
     
     #test if float returns 2.05 correctly 
     #float can return 2.05 as 2.04 in some cases
-    test_setter_in_doubles "2.05"
+    test_setter_in_doubles "2.05", seperator
+    
+    #float can return 2,05 as 2.04 in some cases
+    test_setter_in_doubles "2,05", seperator
     
     #test an empty_setter
-    test_setter_in_cents ""
-    test_setter_in_doubles ""
+    test_setter_in_cents "", seperator
+    test_setter_in_doubles "", seperator
   end  
   
   # test if the setter sets the price correctly if price is given in integers
@@ -72,8 +83,4 @@ module ActsAsPriceHelper
     [:price, @column_name]
   end
 
-# function not used    
-#  def columns
-#    columns_in_doubles + columns_in_cents
-#  end
 end
