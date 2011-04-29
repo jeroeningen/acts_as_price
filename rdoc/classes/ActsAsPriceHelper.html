@@ -80,7 +80,6 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000008">columns</a>&nbsp;&nbsp;
       <a href="#M000006">columns_in_cents</a>&nbsp;&nbsp;
       <a href="#M000007">columns_in_doubles</a>&nbsp;&nbsp;
       <a href="#M000003">test_acts_as_price_methods</a>&nbsp;&nbsp;
@@ -107,29 +106,6 @@
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
-
-        <div class="method-heading">
-          <a href="#M000008" class="method-signature">
-          <span class="method-name">columns</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000008-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 73</span>
-73:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns</span>
-74:     <span class="ruby-identifier">columns_in_doubles</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">columns_in_cents</span>
-75:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000006" class="method-detail">
         <a name="M000006"></a>
 
@@ -144,10 +120,10 @@
             onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000006-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 65</span>
-65:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_in_cents</span> 
-66:     [<span class="ruby-identifier">:price_in_cents</span>, <span class="ruby-node">&quot;#{@column_name}_in_cents&quot;</span>]
-67:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 67</span>
+67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_in_cents</span> 
+68:     [<span class="ruby-identifier">:price_in_cents</span>, <span class="ruby-node">&quot;#{@column_name}_in_cents&quot;</span>]
+69:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -167,10 +143,10 @@
             onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000007-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 69</span>
-69:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_in_doubles</span>
-70:     [<span class="ruby-identifier">:price</span>, <span class="ruby-ivar">@column_name</span>]
-71:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 71</span>
+71:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_in_doubles</span>
+72:     [<span class="ruby-identifier">:price</span>, <span class="ruby-ivar">@column_name</span>]
+73:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -234,31 +210,34 @@ Note the you can also specify the model in a before block in your tests
 
         <div class="method-heading">
           <a href="#M000004" class="method-signature">
-          <span class="method-name">test_setter_in_cents</span><span class="method-args">(cents)</span>
+          <span class="method-name">test_setter_in_cents</span><span class="method-args">(cents, seperator)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+test if the setter sets the price correctly if price is given in integers
+</p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000004-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 33</span>
-33:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_setter_in_cents</span> <span class="ruby-identifier">cents</span>
-34:     <span class="ruby-identifier">columns_in_cents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">setter</span><span class="ruby-operator">|</span>
-35:       <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{setter}=&quot;</span>, <span class="ruby-identifier">cents</span>)
-36:       <span class="ruby-identifier">columns_in_cents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
-37:         <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cents</span>.<span class="ruby-identifier">to_i</span>
-38:       <span class="ruby-keyword kw">end</span>
-39:       <span class="ruby-identifier">columns_in_doubles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
-40:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cents</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-41:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-42:         <span class="ruby-keyword kw">else</span>
-43:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, (<span class="ruby-identifier">cents</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>)
-44:         <span class="ruby-keyword kw">end</span>
-45:       <span class="ruby-keyword kw">end</span>
-46:     <span class="ruby-keyword kw">end</span>
-47:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 34</span>
+34:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_setter_in_cents</span> <span class="ruby-identifier">cents</span>, <span class="ruby-identifier">seperator</span>
+35:     <span class="ruby-identifier">columns_in_cents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">setter</span><span class="ruby-operator">|</span>
+36:       <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{setter}=&quot;</span>, <span class="ruby-identifier">cents</span>)
+37:       <span class="ruby-identifier">columns_in_cents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
+38:         <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cents</span>.<span class="ruby-identifier">to_i</span>
+39:       <span class="ruby-keyword kw">end</span>
+40:       <span class="ruby-identifier">columns_in_doubles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
+41:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cents</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+42:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+43:         <span class="ruby-keyword kw">else</span>
+44:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, (<span class="ruby-identifier">cents</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.&quot;</span>, <span class="ruby-identifier">seperator</span>)
+45:         <span class="ruby-keyword kw">end</span>
+46:       <span class="ruby-keyword kw">end</span>
+47:     <span class="ruby-keyword kw">end</span>
+48:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -269,31 +248,34 @@ Note the you can also specify the model in a before block in your tests
 
         <div class="method-heading">
           <a href="#M000005" class="method-signature">
-          <span class="method-name">test_setter_in_doubles</span><span class="method-args">(double)</span>
+          <span class="method-name">test_setter_in_doubles</span><span class="method-args">(double, seperator)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+test if the setter sets the price correctly if price is given in doubles
+</p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000005-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 49</span>
-49:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_setter_in_doubles</span> <span class="ruby-identifier">double</span>
-50:     <span class="ruby-identifier">columns_in_doubles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">setter</span><span class="ruby-operator">|</span>
-51:       <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{setter}=&quot;</span>, <span class="ruby-identifier">double</span>)
-52:       <span class="ruby-identifier">columns_in_cents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
-53:         <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> (<span class="ruby-identifier">double</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_i</span>
-54:       <span class="ruby-keyword kw">end</span>
-55:       <span class="ruby-identifier">columns_in_doubles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
-56:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">double</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-57:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-58:         <span class="ruby-keyword kw">else</span>
-59:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-identifier">double</span>)
-60:         <span class="ruby-keyword kw">end</span>
-61:       <span class="ruby-keyword kw">end</span>
-62:     <span class="ruby-keyword kw">end</span>
-63:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/acts_as_price_helper.rb, line 51</span>
+51:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_setter_in_doubles</span> <span class="ruby-identifier">double</span>, <span class="ruby-identifier">seperator</span>
+52:     <span class="ruby-identifier">columns_in_doubles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">setter</span><span class="ruby-operator">|</span>
+53:       <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{setter}=&quot;</span>, <span class="ruby-identifier">double</span>)
+54:       <span class="ruby-identifier">columns_in_cents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
+55:         <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> (<span class="ruby-identifier">double</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_i</span>
+56:       <span class="ruby-keyword kw">end</span>
+57:       <span class="ruby-identifier">columns_in_doubles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">getter</span><span class="ruby-operator">|</span>
+58:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">double</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+59:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+60:         <span class="ruby-keyword kw">else</span>
+61:           <span class="ruby-ivar">@acts_as_price_model</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">getter</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-identifier">double</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>)).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.&quot;</span>, <span class="ruby-identifier">seperator</span>)
+62:         <span class="ruby-keyword kw">end</span>
+63:       <span class="ruby-keyword kw">end</span>
+64:     <span class="ruby-keyword kw">end</span>
+65:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

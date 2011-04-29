@@ -7,38 +7,49 @@ Create a column in the table of your database which you want to acts as a price.
 NOTE THAT THE COLUMN MUST BE OF THE TYPE INTEGER.
 
 In your model add the following:
-- acts_as_price column_name, :validates = true
+- acts_as_price column_name, {:validates => true, :comma_seperated => true}
 
 column_name is the name of your database column e.g. price or price_per_liter.
 
 validates is optional and add validation to the column
+
+comma_seperated is also optional and return the price comma seperated instead of dot seperated
 
 This plugin creates the following getters and setters:
 - 'price_in_cents' and '<column_name>_in_cents' #sets and returns the price in cents
 - 'price' and '<column_name>' #sets and returns the price
 
 =EXAMPLES
+ class Car < ActiveRecord::Base
+  acts_as_price :price, :comma_seperated => true
+ end
+
 car = Car.new :price => 12999
 
-car.price #12999.00
+car.price -> 12999,00
 
-car.price_in_cents #1299900
+car.price_in_cents -> 1299900
 
+ class Fueltype < ActiveRecord::Base
+  acts_as_price :price_per_liter, :validates => true
+ end
+ 
 fuel = Fueltype.new :price_per_liter => 1.12
 
-fuel.price #1.12
+fuel.price -> 1.12
 
-fuel.price_in_cents #112
+fuel.price_in_cents -> 112
 
-fuel.price_per_liter #1.12
+fuel.price_per_liter -> 1.12
 
-fuel.price_per_liter_in_cents #1.12
+fuel.price_per_liter_in_cents -> 1.12
 
 =RSPEC INTERGRATION
 Acts As Price comes with a helper method to automatically test the plugin using Rspec.
 
 To use this method please add the following to your spec_helper.rb file:
 - config.include(ActsAsPriceHelper)
+- and if you using the gem, please also add: require 'acts_as_price_helper'
 Now you may add the following code to your spec-files for your models:
   context "given an valid model" do
     it "should acts as price" do
@@ -48,9 +59,6 @@ Now you may add the following code to your spec-files for your models:
 
 =TESTING
 To test the plugin use the command 'rake test' or 'rspec spec/*_spec.rb' inside the dir '~/vendor/plugins/acts_as_price' 
-
-=KNOWN BUGS
-The acts_as_price plugin does not accept comma-seperated prices at the moment.
 
 =NOTES
 This plugin comes with Rspec tests. 

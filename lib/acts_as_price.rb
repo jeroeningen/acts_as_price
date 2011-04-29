@@ -11,12 +11,14 @@ module ActiveRecord
         # 
         # Valid options:
         # * :validates => true (performs validates_presence_of and validates_numericality_of)
+        # * :comma_seperated => true (set and get the price as a comma-seperated value)
         def acts_as_price column_name, options = {}
           validates column_name, :presence => true, :numericality => {:greater_than => 0} if options[:validates] == true
+          comma = options[:comma_seperated]
           
           #setters
           define_method("#{column_name}=") do |val|
-            super((val.to_f * 100).to_s)
+            super((val.to_s.gsub(",", ".").to_f * 100).to_s)
           end
           alias_method("price=", "#{column_name}=")
           
@@ -30,12 +32,18 @@ module ActiveRecord
             if super == 0.0
               ""
             else
-              sprintf("%.2f", super.to_f / 100)
+              if comma
+                sprintf("%.2f", super.to_f / 100).gsub(".", ",")
+              else
+                sprintf("%.2f", super.to_f / 100)
+              end
             end
           end
           alias_method "price", column_name
           
-          define_method("price_in_cents") {((send column_name).to_f * 100).to_s.to_i}
+          define_method("price_in_cents") do
+            ((send column_name).gsub(",", ".").to_f * 100).to_s.to_i
+          end
           alias_method "#{column_name}_in_cents", "price_in_cents"
         end
       end

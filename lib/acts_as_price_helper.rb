@@ -30,7 +30,8 @@ module ActsAsPriceHelper
     test_setter_in_doubles ""
   end  
   
-  def test_setter_in_cents cents
+  # test if the setter sets the price correctly if price is given in integers
+  def test_setter_in_cents cents, seperator
     columns_in_cents.each do |setter|
       @acts_as_price_model.send("#{setter}=", cents)
       columns_in_cents.each do |getter|
@@ -40,23 +41,24 @@ module ActsAsPriceHelper
         if cents == ""
           @acts_as_price_model.send(getter).should == ""
         else
-          @acts_as_price_model.send(getter).should == sprintf("%.2f", (cents.to_f / 100).to_s)
+          @acts_as_price_model.send(getter).should == sprintf("%.2f", (cents.to_f / 100).to_s).gsub(".", seperator)
         end
       end
     end
   end
   
-  def test_setter_in_doubles double
+  # test if the setter sets the price correctly if price is given in doubles
+  def test_setter_in_doubles double, seperator
     columns_in_doubles.each do |setter|
       @acts_as_price_model.send("#{setter}=", double)
       columns_in_cents.each do |getter|
-        @acts_as_price_model.send(getter).should == (double.to_f * 100).to_s.to_i
+        @acts_as_price_model.send(getter).should == (double.gsub(",", ".").to_f * 100).to_s.to_i
       end
       columns_in_doubles.each do |getter|
         if double == ""
           @acts_as_price_model.send(getter).should == ""
         else
-          @acts_as_price_model.send(getter).should == sprintf("%.2f", double)
+          @acts_as_price_model.send(getter).should == sprintf("%.2f", double.gsub(",", ".")).gsub(".", seperator)
         end
       end
     end
@@ -69,8 +71,9 @@ module ActsAsPriceHelper
   def columns_in_doubles
     [:price, @column_name]
   end
-    
-  def columns
-    columns_in_doubles + columns_in_cents
-  end
+
+# function not used    
+#  def columns
+#    columns_in_doubles + columns_in_cents
+#  end
 end
