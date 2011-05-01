@@ -65,6 +65,9 @@ To test the plugin use the command 'rspec spec/**' inside the dir '~/vendor/plug
 =KNOWN BUGS
 The command 'rake test' is not running properly at the moment.
 
+When creating a text_field, by default Rails gets the 'raw' value from the database, so you probably get the wrong value in your text_field. To prevent this please do the following:
+ f.textfield :price, :value => @object.price
+
 =NOTES
 This plugin comes with Rspec tests. 
 However this plugin assumes that you have a database configuration, it actually don't use the database for the Rspec tests.
