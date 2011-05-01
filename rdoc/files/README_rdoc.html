@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Sun May 01 07:30:16 -0700 2011</td>
+      <td>Sun May 01 07:51:31 -0700 2011</td>
     </tr>
     </table>
   </div>
@@ -86,7 +86,7 @@ In your model add the following:
 </p>
 <ul>
 <li>acts_as_price column_name, {:validates =&gt; true, :comma_seperated =&gt;
-true}
+true, :currency =&gt; currency}
 
 </li>
 </ul>
@@ -98,8 +98,11 @@ price_per_liter.
 validates is optional and add validation to the column
 </p>
 <p>
-comma_seperated is also optional and return the price comma seperated
-instead of dot seperated
+comma_seperated is optional and return the price comma seperated instead of
+dot seperated
+</p>
+<p>
+currency is optional and adds a prefix for the currency to the price.
 </p>
 <p>
 This plugin creates the following getters and setters:
@@ -117,14 +120,14 @@ the price
 <h1>EXAMPLES</h1>
 <pre>
  class Car &lt; ActiveRecord::Base
-  acts_as_price :price, :comma_seperated =&gt; true
+  acts_as_price :price, :comma_seperated =&gt; true, :currency =&gt; &quot;EUR&quot;
  end
 </pre>
 <p>
 car = Car.new :price =&gt; 12999
 </p>
 <p>
-car.price -&gt; 12999,00
+car.price -&gt; EUR. 12999,00
 </p>
 <p>
 car.price_in_cents -&gt; 1299900

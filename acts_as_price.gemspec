@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts_as_price}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeroen van Ingen"]
-  s.date = %q{2011-04-29}
+  s.date = %q{2011-05-01}
   s.description = %q{A specified database column acts as a price and creates on the fly methods like 'price' and 'price_in_cents'. For more information visit: http://github.com/jeroeningen/acts_as_price}
   s.email = %q{jeroeningen@gmail.com}
   s.extra_rdoc_files = [
@@ -40,10 +40,11 @@ Gem::Specification.new do |s|
     "rdoc/fr_method_index.html",
     "rdoc/index.html",
     "rdoc/rdoc-style.css",
-    "spec/car_spec.rb",
-    "spec/fueltype_spec.rb",
+    "spec/advanced_tests/car_spec.rb",
+    "spec/advanced_tests/fueltype_spec.rb",
     "spec/models/car.rb",
     "spec/models/fueltype.rb",
+    "spec/simple_tests/car_and_fueltype_spec.rb",
     "spec/spec_helper.rb",
     "uninstall.rb"
   ]
@@ -53,10 +54,11 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A specified database column acts as a price}
   s.test_files = [
-    "spec/car_spec.rb",
-    "spec/fueltype_spec.rb",
+    "spec/advanced_tests/car_spec.rb",
+    "spec/advanced_tests/fueltype_spec.rb",
     "spec/models/car.rb",
     "spec/models/fueltype.rb",
+    "spec/simple_tests/car_and_fueltype_spec.rb",
     "spec/spec_helper.rb"
   ]
 

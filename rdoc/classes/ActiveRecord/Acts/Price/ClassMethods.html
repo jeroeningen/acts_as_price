@@ -135,7 +135,7 @@ value)
     <span class="ruby-comment cmt"># File lib/acts_as_price.rb, line 15</span>
 15:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_price</span> <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {}
 16:           <span class="ruby-identifier">validates</span> <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">:presence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">:numericality</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:greater_than</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>} <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:validates</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
-17:           <span class="ruby-identifier">comma</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:comma_seperated</span>]
+17:           <span class="ruby-identifier">currency</span>, <span class="ruby-identifier">comma</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:currency</span>], <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:comma_seperated</span>]
 18:           
 19:           <span class="ruby-comment cmt">#setters</span>
 20:           <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{column_name}=&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
@@ -154,19 +154,29 @@ value)
 33:               <span class="ruby-value str">&quot;&quot;</span>
 34:             <span class="ruby-keyword kw">else</span>
 35:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">comma</span>
-36:                 <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-keyword kw">super</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.&quot;</span>, <span class="ruby-value str">&quot;,&quot;</span>)
+36:                 <span class="ruby-identifier">return_val</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-keyword kw">super</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.&quot;</span>, <span class="ruby-value str">&quot;,&quot;</span>)
 37:               <span class="ruby-keyword kw">else</span>
-38:                 <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-keyword kw">super</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>)
+38:                 <span class="ruby-identifier">return_val</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-keyword kw">super</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>)
 39:               <span class="ruby-keyword kw">end</span>
-40:             <span class="ruby-keyword kw">end</span>
-41:           <span class="ruby-keyword kw">end</span>
-42:           <span class="ruby-identifier">alias_method</span> <span class="ruby-value str">&quot;price&quot;</span>, <span class="ruby-identifier">column_name</span>
-43:           
-44:           <span class="ruby-identifier">define_method</span>(<span class="ruby-value str">&quot;price_in_cents&quot;</span>) <span class="ruby-keyword kw">do</span>
-45:             ((<span class="ruby-identifier">send</span> <span class="ruby-identifier">column_name</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_i</span>
-46:           <span class="ruby-keyword kw">end</span>
-47:           <span class="ruby-identifier">alias_method</span> <span class="ruby-node">&quot;#{column_name}_in_cents&quot;</span>, <span class="ruby-value str">&quot;price_in_cents&quot;</span>
-48:         <span class="ruby-keyword kw">end</span>
+40:               <span class="ruby-identifier">return_val</span> = <span class="ruby-identifier">currency</span> <span class="ruby-value">? </span><span class="ruby-node">&quot;#{currency}. #{return_val}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">return_val</span>
+41:               <span class="ruby-identifier">return_val</span>
+42:             <span class="ruby-keyword kw">end</span>
+43:           <span class="ruby-keyword kw">end</span>
+44:           <span class="ruby-identifier">alias_method</span> <span class="ruby-value str">&quot;price&quot;</span>, <span class="ruby-identifier">column_name</span>
+45:           
+46:           <span class="ruby-identifier">define_method</span>(<span class="ruby-value str">&quot;price_in_cents&quot;</span>) <span class="ruby-keyword kw">do</span>
+47:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">currency</span>
+48:               ((<span class="ruby-identifier">send</span> <span class="ruby-identifier">column_name</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-node">&quot;#{currency}. &quot;</span>, <span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_i</span>
+49:             <span class="ruby-keyword kw">else</span>
+50:               ((<span class="ruby-identifier">send</span> <span class="ruby-identifier">column_name</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_i</span>
+51:             <span class="ruby-keyword kw">end</span>
+52:           <span class="ruby-keyword kw">end</span>
+53:           <span class="ruby-identifier">alias_method</span> <span class="ruby-node">&quot;#{column_name}_in_cents&quot;</span>, <span class="ruby-value str">&quot;price_in_cents&quot;</span>
+54:           
+55:           <span class="ruby-identifier">define_method</span>(<span class="ruby-value str">&quot;currency&quot;</span>) <span class="ruby-keyword kw">do</span>
+56:             <span class="ruby-identifier">currency</span>
+57:           <span class="ruby-keyword kw">end</span>
+58:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

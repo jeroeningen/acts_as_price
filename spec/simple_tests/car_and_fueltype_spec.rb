@@ -5,7 +5,7 @@ describe Car do
   context "adding a price as comma seperated value" do
     it "should return the price as comma-seperated value" do
       car = stub_model(Car, :price => "23000,59")
-      car.price.should == "23000,59"
+      car.price.should == "EUR. 23000,59"
     end
     it "should return the pricce in cents" do
       car = stub_model(Car, :price => "23000,59")
@@ -16,16 +16,23 @@ describe Car do
   context "adding the price as a dot seperated value" do
     it "should return the price as a comma seperated value" do
       car = stub_model(Car, :price => "23000.59")
-      car.price.should == "23000,59"
+      car.price.should == "EUR. 23000,59"
       car = stub_model(Car, :price => "23000.5")
-      car.price.should == "23000,50"
+      car.price.should == "EUR. 23000,50"
     end
   end
   
   context "adding the price as an integer" do
     it "should return the price as a comma-seperated value" do
       car = stub_model(Car, :price => "23000")
-      car.price.should == "23000,00"
+      car.price.should == "EUR. 23000,00"
+    end
+  end
+  
+  context "using a currency" do
+    it "should return a currency" do
+      car = stub_model(Car)
+      car.currency.should == "EUR"
     end
   end
 end

@@ -7,13 +7,15 @@ Create a column in the table of your database which you want to acts as a price.
 NOTE THAT THE COLUMN MUST BE OF THE TYPE INTEGER.
 
 In your model add the following:
-- acts_as_price column_name, {:validates => true, :comma_seperated => true}
+- acts_as_price column_name, {:validates => true, :comma_seperated => true, :currency => currency}
 
 column_name is the name of your database column e.g. price or price_per_liter.
 
 validates is optional and add validation to the column
 
-comma_seperated is also optional and return the price comma seperated instead of dot seperated
+comma_seperated is optional and return the price comma seperated instead of dot seperated
+
+currency is optional and adds a prefix for the currency to the price.
 
 This plugin creates the following getters and setters:
 - 'price_in_cents' and '<column_name>_in_cents' #sets and returns the price in cents
@@ -21,12 +23,12 @@ This plugin creates the following getters and setters:
 
 =EXAMPLES
  class Car < ActiveRecord::Base
-  acts_as_price :price, :comma_seperated => true
+  acts_as_price :price, :comma_seperated => true, :currency => "EUR"
  end
 
 car = Car.new :price => 12999
 
-car.price -> 12999,00
+car.price -> EUR. 12999,00
 
 car.price_in_cents -> 1299900
 

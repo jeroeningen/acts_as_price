@@ -32,7 +32,7 @@ describe Car do
     end
     it "should return the price seperated by a comma" do
       columns_in_doubles.each do |column|
-        @acts_as_price_model.send(column).should == "23995,99"
+        @acts_as_price_model.send(column).should == "EUR. 23995,99"
       end
     end
   end
@@ -50,8 +50,8 @@ describe Car do
   
   context "given a float as price" do
     it "should convert it to the right price in cents" do
-      test_setter_in_doubles "25500,5", ","
-      test_setter_in_doubles "21599,05", ","
+      test_setter_in_doubles "EUR. 25500,5", ","
+      test_setter_in_doubles "EUR. 21599,05", ","
     end
   end
   
