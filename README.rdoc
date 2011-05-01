@@ -58,7 +58,10 @@ Now you may add the following code to your spec-files for your models:
   end
 
 =TESTING
-To test the plugin use the command 'rake test' or 'rspec spec/*_spec.rb' inside the dir '~/vendor/plugins/acts_as_price' 
+To test the plugin use the command 'rspec spec/**' inside the dir '~/vendor/plugins/acts_as_price' 
+
+=KNOWN BUGS
+The command 'rake test' is not running properly at the moment.
 
 =NOTES
 This plugin comes with Rspec tests. 
