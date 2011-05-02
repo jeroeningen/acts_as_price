@@ -58,10 +58,10 @@ describe Fueltype do
     end
   end
   
-#  context "given the price is zero" do
-#    it "should return an empty price per liter" do
-#      test_setter_in_cents "", @seperator
-#      test_setter_in_doubles "", @seperator
-#    end
-#  end
+  context "given the price is zero" do
+    it "should return an empty price per liter" do
+      test_setter_in_cents "", @seperator
+      test_setter_in_doubles "", @seperator
+    end
+  end
 end
