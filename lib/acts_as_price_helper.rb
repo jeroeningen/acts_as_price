@@ -100,7 +100,7 @@ module ActsAsPriceHelper
           @acts_as_price_model.send(getter).should == ""
         else
           if currency
-            @acts_as_price_model.send(getter).should == currency + ". " + sprintf("%.2f", double.gsub(",", ".").to_s).gsub(".", seperator)
+            @acts_as_price_model.send(getter).should == currency + ". " + sprintf("%.2f", (double.gsub(",", ".").to_f + 0.001).to_s).gsub(".", seperator)
           else
             @acts_as_price_model.send(getter).should == sprintf("%.2f", double.gsub(",", ".").to_s).gsub(".", seperator)
           end
