@@ -28,8 +28,12 @@ module ActsAsPriceHelper
       #test for special cases
       #test if 1.5 is returned as 1.50
       test_setter_in_doubles "#{currency}. 1.5", seperator
+      test_setter_in_doubles "#{currency}. 1.505", seperator
+      test_setter_in_doubles "#{currency}. 1.504", seperator
       #test if 1,5 is returned as 1.50
       test_setter_in_doubles "#{currency}. 1,5", seperator
+      test_setter_in_doubles "#{currency}. 1,505", seperator
+      test_setter_in_doubles "#{currency}. 1,504", seperator
 
       #test if float returns 2.05 correctly 
       #float can return 2.05 as 2.04 in some cases
@@ -65,7 +69,7 @@ module ActsAsPriceHelper
     columns_in_cents.each do |setter|
       @acts_as_price_model.send("#{setter}=", cents)
       columns_in_cents.each do |getter|
-        @acts_as_price_model.send(getter).should == cents.to_i
+        @acts_as_price_model.send(getter).should == (cents.to_f + 0.5).to_i
       end
       columns_in_doubles.each do |getter|
         if cents == ""
@@ -89,16 +93,16 @@ module ActsAsPriceHelper
     columns_in_doubles.each do |setter|
       @acts_as_price_model.send("#{setter}=", double)
       columns_in_cents.each do |getter|
-        @acts_as_price_model.send(getter).should == (double.gsub(",", ".").to_f * 100).to_s.to_i
+        @acts_as_price_model.send(getter).should == ((double.gsub(",", ".").to_f * 100) + 0.5).to_s.to_i
       end
       columns_in_doubles.each do |getter|
         if double == ""
           @acts_as_price_model.send(getter).should == ""
         else
           if currency
-            @acts_as_price_model.send(getter).should == currency + ". " + sprintf("%.2f", double.gsub(",", ".")).gsub(".", seperator)
+            @acts_as_price_model.send(getter).should == currency + ". " + sprintf("%.2f", double.gsub(",", ".").to_s).gsub(".", seperator)
           else
-            @acts_as_price_model.send(getter).should == sprintf("%.2f", double.gsub(",", ".")).gsub(".", seperator)
+            @acts_as_price_model.send(getter).should == sprintf("%.2f", double.gsub(",", ".").to_s).gsub(".", seperator)
           end
         end
       end

@@ -53,13 +53,15 @@ describe Fueltype do
     it "should convert it to the right price in cents" do
       test_setter_in_doubles "1.5", @seperator
       test_setter_in_doubles "2.05", @seperator
+      test_setter_in_doubles "2.055", @seperator
+      test_setter_in_doubles "2.054", @seperator
     end
   end
   
-  context "given the price is zero" do
-    it "should return an empty price per liter" do
-      test_setter_in_cents "", @seperator
-      test_setter_in_doubles "", @seperator
-    end
-  end
+#  context "given the price is zero" do
+#    it "should return an empty price per liter" do
+#      test_setter_in_cents "", @seperator
+#      test_setter_in_doubles "", @seperator
+#    end
+#  end
 end

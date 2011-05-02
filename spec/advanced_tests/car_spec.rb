@@ -3,7 +3,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 describe Car do
   before(:each) do
     @column_name = :price
-    @acts_as_price_model = stub_model(Car, :brand => "Ford", :cartype => "Focus", :price => "23995,99")
+    @acts_as_price_model = stub_model(Car, :brand => "Ford", :cartype => "Stationwagon", :model => "Focus", :price => "23995,99")
   end
 
   context "given an empty car" do
@@ -11,6 +11,7 @@ describe Car do
       car = Car.new
       should validate_presence_of :brand
       should validate_presence_of :cartype
+      should validate_presence_of :model
       car.valid?.should be_false
       car.save.should be_false
     end
@@ -52,6 +53,8 @@ describe Car do
     it "should convert it to the right price in cents" do
       test_setter_in_doubles "EUR. 25500,5", ","
       test_setter_in_doubles "EUR. 21599,05", ","
+      test_setter_in_doubles "EUR. 21599,055", ","
+      test_setter_in_doubles "EUR. 21599,054", ","
     end
   end
   

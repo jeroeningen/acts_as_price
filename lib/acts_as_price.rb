@@ -18,7 +18,7 @@ module ActiveRecord
           
           #setters
           define_method("#{column_name}=") do |val|
-            super((val.to_s.gsub(",", ".").to_f * 100).to_s)
+            super(((val.to_s.gsub(",", ".").to_f * 100) + 0.5).to_s)
           end
           alias_method("price=", "#{column_name}=")
           
@@ -29,7 +29,7 @@ module ActiveRecord
           
           #getters
           define_method(column_name) do
-            if super == 0.0
+            if super.blank? or super == 0.0
               ""
             else
               if comma
