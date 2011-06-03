@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: ActiveRecord::Acts::Price::ClassMethods</title>
+
+	<link rel="stylesheet" href="../../../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../../../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../../../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../../../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../../../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../../../index.html">Home</a>
+          <a href="../../../index.html#classes">Classes</a>
+          <a href="../../../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../../../lib/acts_as_price_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/acts_as_price.rb">lib/acts_as_price.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-acts_as_price">#acts_as_price</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../../../README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../../../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../../../ActiveRecord.html">ActiveRecord</a></li>
+				
+					<li><a href="../../../ActiveRecord/Acts.html">ActiveRecord::Acts</a></li>
+				
+					<li><a href="../../../ActiveRecord/Acts/Price.html">ActiveRecord::Acts::Price</a></li>
+				
+					<li><a href="../../../ActiveRecord/Acts/Price/ClassMethods.html">ActiveRecord::Acts::Price::ClassMethods</a></li>
+				
+					<li><a href="../../../ActsAsPriceHelper.html">ActsAsPriceHelper</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">ActiveRecord::Acts::Price::ClassMethods</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="acts-as-price-method" class="method-detail ">
+				<a name="method-i-acts_as_price"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">acts_as_price</span><span
+						class="method-args">(column_name, options = {})</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Specify the column_name that needs to act as price
+</p>
+<p>
+Valid options:
+</p>
+<ul>
+<li><p>
+:validates => true (performs validates_presence_of and
+validates_numericality_of)
+</p>
+</li>
+<li><p>
+:comma_seperated => true (set and get the price as a comma-seperated value)
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="acts-as-price-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/acts_as_price.rb, line 15</span>
+15:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_price</span> <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {}
+16:           <span class="ruby-identifier">validates</span> <span class="ruby-identifier">column_name</span>, <span class="ruby-value">:presence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:numericality</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:greater_than</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>} <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:validates</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+17:           <span class="ruby-identifier">currency</span>, <span class="ruby-identifier">comma</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:currency</span>], <span class="ruby-identifier">options</span>[<span class="ruby-value">:comma_seperated</span>]
+18:           
+19:           <span class="ruby-comment cmt">#setters</span>
+20:           <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{column_name}=&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+21:             <span class="ruby-keyword kw">super</span>(((<span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> * <span class="ruby-value">100</span>) <span class="ruby-operator">+</span> <span class="ruby-value">0.5</span>).<span class="ruby-identifier">to_s</span>)
+22:           <span class="ruby-keyword kw">end</span>
+23:           <span class="ruby-identifier">alias_method</span>(<span class="ruby-value str">&quot;price=&quot;</span>, <span class="ruby-node">&quot;#{column_name}=&quot;</span>)
+24:           
+25:           <span class="ruby-identifier">define_method</span>(<span class="ruby-value str">&quot;price_in_cents=&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+26:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value str">&quot;price=&quot;</span>, <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>)
+27:           <span class="ruby-keyword kw">end</span>
+28:           <span class="ruby-identifier">alias_method</span> <span class="ruby-node">&quot;#{column_name}_in_cents=&quot;</span>, <span class="ruby-value str">&quot;price_in_cents=&quot;</span>
+29:           
+30:           <span class="ruby-comment cmt">#getters</span>
+31:           <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">column_name</span>) <span class="ruby-keyword kw">do</span>
+32:             <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">super</span>().<span class="ruby-identifier">blank?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-keyword kw">super</span>() <span class="ruby-operator">==</span> <span class="ruby-value">0.0</span>
+33:               <span class="ruby-value str">&quot;&quot;</span>
+34:             <span class="ruby-keyword kw">else</span>
+35:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">comma</span>
+36:                 <span class="ruby-identifier">return_val</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-keyword kw">super</span>().<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;.&quot;</span>, <span class="ruby-value str">&quot;,&quot;</span>)
+37:               <span class="ruby-keyword kw">else</span>
+38:                 <span class="ruby-identifier">return_val</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%.2f&quot;</span>, <span class="ruby-keyword kw">super</span>().<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>)
+39:               <span class="ruby-keyword kw">end</span>
+40:               <span class="ruby-identifier">return_val</span> = <span class="ruby-identifier">currency</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{currency}. #{return_val}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">return_val</span>
+41:               <span class="ruby-identifier">return_val</span>
+42:             <span class="ruby-keyword kw">end</span>
+43:           <span class="ruby-keyword kw">end</span>
+44:           <span class="ruby-identifier">alias_method</span> <span class="ruby-value str">&quot;price&quot;</span>, <span class="ruby-identifier">column_name</span>
+45:           
+46:           <span class="ruby-identifier">define_method</span>(<span class="ruby-value str">&quot;price_in_cents&quot;</span>) <span class="ruby-keyword kw">do</span>
+47:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">currency</span>
+48:               ((<span class="ruby-identifier">send</span> <span class="ruby-identifier">column_name</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-node">&quot;#{currency}. &quot;</span>, <span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> * <span class="ruby-value">100</span>).<span class="ruby-identifier">round</span>
+49:             <span class="ruby-keyword kw">else</span>
+50:               ((<span class="ruby-identifier">send</span> <span class="ruby-identifier">column_name</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;,&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>).<span class="ruby-identifier">to_f</span> * <span class="ruby-value">100</span>).<span class="ruby-identifier">round</span>
+51:             <span class="ruby-keyword kw">end</span>
+52:           <span class="ruby-keyword kw">end</span>
+53:           <span class="ruby-identifier">alias_method</span> <span class="ruby-node">&quot;#{column_name}_in_cents&quot;</span>, <span class="ruby-value str">&quot;price_in_cents&quot;</span>
+54:           
+55:           <span class="ruby-identifier">define_method</span>(<span class="ruby-value str">&quot;currency&quot;</span>) <span class="ruby-keyword kw">do</span>
+56:             <span class="ruby-identifier">currency</span>
+57:           <span class="ruby-keyword kw">end</span>
+58:         <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

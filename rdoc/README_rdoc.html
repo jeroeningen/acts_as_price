@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: README.rdoc [ActsAsPrice]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./ActiveRecord.html">ActiveRecord</a></li>
+				
+					<li><a href="./ActiveRecord/Acts.html">ActiveRecord::Acts</a></li>
+				
+					<li><a href="./ActiveRecord/Acts/Price.html">ActiveRecord::Acts::Price</a></li>
+				
+					<li><a href="./ActiveRecord/Acts/Price/ClassMethods.html">ActiveRecord::Acts::Price::ClassMethods</a></li>
+				
+					<li><a href="./ActsAsPriceHelper.html">ActsAsPriceHelper</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1>INSTALLATION</h1>
+<p>
+Plugin: rails plugin install git@github.com:jeroeningen/acts_as_price.git
+</p>
+<p>
+Gem: If you&#8217;re on Ruby 1.8, please use version 0.2.3 of the Gem. If
+you&#8217;re on Ruby 1.9 please use version 0.2.4 of the Gem.
+</p>
+<h1>USAGE</h1>
+<p>
+Create a column in the table of your database which you want to acts as a
+price. 
+</p>
+<p>
+NOTE THAT THE COLUMN MUST BE OF THE TYPE INTEGER.
+</p>
+<p>
+In your model add the following:
+</p>
+<ul>
+<li><p>
+acts_as_price column_name, {:validates => true, :comma_seperated => true,
+:currency => currency}
+</p>
+</li>
+</ul>
+<p>
+column_name is the name of your database column e.g. price or
+price_per_liter.
+</p>
+<p>
+validates is optional and add validation to the column
+</p>
+<p>
+comma_seperated is optional and return the price comma seperated instead of
+dot seperated
+</p>
+<p>
+currency is optional and adds a prefix for the currency to the price.
+</p>
+<p>
+This plugin creates the following getters and setters:
+</p>
+<ul>
+<li><p>
+&#8216;price_in_cents&#8217; and &#8217;<column_name>_in_cents&#8217; # and
+returns the price in cents
+</p>
+</li>
+<li><p>
+&#8216;price&#8217; and &#8217;<column_name>&#8217; # and returns the price
+</p>
+</li>
+</ul>
+<h1>EXAMPLES</h1>
+<pre>
+ class Car &lt; ActiveRecord::Base
+  acts_as_price :price, :comma_seperated =&gt; true, :currency =&gt; &quot;EUR&quot;
+ end
+</pre>
+<p>
+car = Car.new :price => 12999
+</p>
+<p>
+car.price -> EUR. 12999,00
+</p>
+<p>
+car.price_in_cents -> 1299900
+</p>
+<pre>
+ class Fueltype &lt; ActiveRecord::Base
+  acts_as_price :price_per_liter, :validates =&gt; true
+ end
+ 
+</pre>
+<p>
+fuel = Fueltype.new :price_per_liter => 1.12
+</p>
+<p>
+fuel.price -> 1.12
+</p>
+<p>
+fuel.price_in_cents -> 112
+</p>
+<p>
+fuel.price_per_liter -> 1.12
+</p>
+<p>
+fuel.price_per_liter_in_cents -> 1.12
+</p>
+<h1>RSPEC INTERGRATION</h1>
+<p>
+Acts As Price comes with a helper method to automatically test the plugin
+using Rspec.
+</p>
+<p>
+To use this method please add the following to your spec_helper.rb file:
+</p>
+<ul>
+<li><p>
+config.include(<a href="ActsAsPriceHelper.html">ActsAsPriceHelper</a>)
+</p>
+</li>
+<li><p>
+and if you using the gem, please also add: require
+&#8216;acts_as_price_helper&#8216;
+</p>
+</li>
+</ul>
+<p>
+Now you may add the following code to your spec-files for your models:
+</p>
+<pre>
+  context &quot;given an valid model&quot; do
+    it &quot;should acts as price&quot; do
+      test_acts_as_price_methods &lt;column_name&gt;, &lt;fixture or stub&gt;
+    end
+  end
+</pre>
+<h1>TESTING</h1>
+<p>
+To test the plugin use the command &#8216;rspec spec/**&#8217; inside the
+dir &#8217;~/vendor/plugins/acts_as_price&#8217; 
+</p>
+<h1>KNOWN BUGS</h1>
+<p>
+The command &#8216;rake test&#8217; is not running properly at the moment.
+</p>
+<p>
+When creating a text_field, by default Rails gets the &#8216;raw&#8217;
+value from the database, so you probably get the wrong value in your
+text_field. To prevent this please do the following:
+</p>
+<pre>
+ f.textfield :price, :value =&gt; @object.price
+</pre>
+<h1>NOTES</h1>
+<p>
+This plugin comes with Rspec tests.  However this plugin assumes that you
+have a database configuration, it actually don&#8217;t use the database for
+the Rspec tests.
+</p>
+<h1>FEEDBACK AND BUGS REPORTS</h1>
+<p>
+For feedback and bug reports contact: jeroeningen@gmail.com
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+
