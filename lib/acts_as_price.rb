@@ -29,13 +29,13 @@ module ActiveRecord
           
           #getters
           define_method(column_name) do
-            if super.blank? or super == 0.0
+            if super().blank? or super() == 0.0
               ""
             else
               if comma
-                return_val = sprintf("%.2f", super.to_f / 100).gsub(".", ",")
+                return_val = sprintf("%.2f", super().to_f / 100).gsub(".", ",")
               else
-                return_val = sprintf("%.2f", super.to_f / 100)
+                return_val = sprintf("%.2f", super().to_f / 100)
               end
               return_val = currency ? "#{currency}. #{return_val}" : return_val
               return_val
@@ -45,9 +45,9 @@ module ActiveRecord
           
           define_method("price_in_cents") do
             if currency
-              ((send column_name).gsub("#{currency}. ", "").gsub(",", ".").to_f * 100).to_s.to_i
+              ((send column_name).gsub("#{currency}. ", "").gsub(",", ".").to_f * 100).round
             else
-              ((send column_name).gsub(",", ".").to_f * 100).to_s.to_i
+              ((send column_name).gsub(",", ".").to_f * 100).round
             end
           end
           alias_method "#{column_name}_in_cents", "price_in_cents"

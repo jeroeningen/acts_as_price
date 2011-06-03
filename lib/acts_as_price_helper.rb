@@ -20,6 +20,7 @@ module ActsAsPriceHelper
     
     #normal test for setter
     test_setter_in_cents "144", seperator
+    
     if @acts_as_price_model.currency
       currency = @acts_as_price_model.currency
       test_setter_in_doubles "#{currency}. 1.41", seperator
@@ -30,6 +31,7 @@ module ActsAsPriceHelper
       test_setter_in_doubles "#{currency}. 1.5", seperator
       test_setter_in_doubles "#{currency}. 1.505", seperator
       test_setter_in_doubles "#{currency}. 1.504", seperator
+      
       #test if 1,5 is returned as 1.50
       test_setter_in_doubles "#{currency}. 1,5", seperator
       test_setter_in_doubles "#{currency}. 1,505", seperator
@@ -100,7 +102,7 @@ module ActsAsPriceHelper
           @acts_as_price_model.send(getter).should == ""
         else
           if currency
-            @acts_as_price_model.send(getter).should == currency + ". " + sprintf("%.2f", (double.gsub(",", ".").to_f + 0.001).to_s).gsub(".", seperator)
+            @acts_as_price_model.send(getter).should == currency + ". " + sprintf("%.2f", double.gsub(",", ".").to_f + 0.0001).gsub(".", seperator)
           else
             @acts_as_price_model.send(getter).should == sprintf("%.2f", double.gsub(",", ".").to_s).gsub(".", seperator)
           end
