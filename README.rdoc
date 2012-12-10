@@ -1,7 +1,7 @@
 =INSTALLATION
 Plugin: rails plugin install git@github.com:jeroeningen/acts_as_price.git
 
-Gem: If you're on Ruby 1.8, please use version 0.2.3 of the Gem. If you're on Ruby 1.9 please use version 0.2.4 of the Gem.
+Gem: If you're on Ruby 1.8, please use version 0.2.3 of the Gem. If you're on Ruby 1.9 please use version 0.2.4 or higher.
 
 =USAGE
 Create a column in the table of your database which you want to acts as a price. 

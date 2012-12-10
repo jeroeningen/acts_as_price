@@ -18,7 +18,11 @@ module ActiveRecord
           
           #setters
           define_method("#{column_name}=") do |val|
-            super(((val.to_s.gsub(",", ".").to_f * 100) + 0.5).to_s)
+            begin
+              super(((val.to_s.gsub(",", ".").to_f * 100) + 0.5).to_s)
+            rescue
+              raise "Pease add the column '#{column_name}'"
+            end
           end
           alias_method("price=", "#{column_name}=")
           

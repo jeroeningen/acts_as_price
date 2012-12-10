@@ -7,24 +7,6 @@ describe Fueltype do
     @seperator = "."
   end
   
-  context "given an empty fueltype" do
-    it "should give an invalid fueltype and not save it" do
-      fueltype = Fueltype.new
-      should validate_presence_of :name
-      should validate_presence_of @column_name
-      fueltype.valid?.should be_false
-      fueltype.save.should be_false
-    end
-  end
-  
-  context "given an valid fueltype" do
-    it "should be valid and saved" do
-      fueltype = Fueltype.new @acts_as_price_model.attributes
-      fueltype.valid?.should be_true
-      fueltype.save.should be_true
-    end
-  end
-  
   context "return the fueltype price" do
     it "should return the price in cents" do
       columns_in_cents.each do |column|

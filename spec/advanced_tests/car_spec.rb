@@ -6,25 +6,6 @@ describe Car do
     @acts_as_price_model = stub_model(Car, :brand => "Ford", :cartype => "Stationwagon", :model => "Focus", :price => "23995,99")
   end
 
-  context "given an empty car" do
-    it "should return an invalid car" do
-      car = Car.new
-      should validate_presence_of :brand
-      should validate_presence_of :cartype
-      should validate_presence_of :model
-      car.valid?.should be_false
-      car.save.should be_false
-    end
-  end
-  
-  context "given an valid car" do
-    it "should succesfully save" do
-      car = Car.new @acts_as_price_model.attributes
-      car.valid?.should be_true
-      car.save.should be_true
-    end
-  end
-  
   context "return the price" do
     it "should return the price in cents" do
       columns_in_cents.each do |column|
