@@ -4,20 +4,19 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{acts_as_price}
+  s.name = "acts_as_price"
   s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeroen van Ingen"]
-  s.date = %q{2012-06-03}
-  s.description = %q{A specified database column acts as a price and creates on the fly methods like 'price' and 'price_in_cents'. For more information visit: http://github.com/jeroeningen/acts_as_price}
-  s.email = %q{jeroeningen@gmail.com}
+  s.date = "2012-12-10"
+  s.description = "A specified database column acts as a price and creates on the fly methods like 'price' and 'price_in_cents'. For more information visit: http://github.com/jeroeningen/acts_as_price"
+  s.email = "jeroeningen@gmail.com"
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
   s.files = [
     "Gemfile",
-    "Gemfile.lock",
     "MIT-LICENSE",
     "README.rdoc",
     "Rakefile",
@@ -27,6 +26,12 @@ Gem::Specification.new do |s|
     "install.rb",
     "lib/acts_as_price.rb",
     "lib/acts_as_price_helper.rb",
+    "rdoc/ActiveRecord.html",
+    "rdoc/ActiveRecord/Acts.html",
+    "rdoc/ActiveRecord/Acts/Price.html",
+    "rdoc/ActiveRecord/Acts/Price/ClassMethods.html",
+    "rdoc/ActsAsPriceHelper.html",
+    "rdoc/README_rdoc.html",
     "rdoc/classes/ActiveRecord.html",
     "rdoc/classes/ActiveRecord/Acts.html",
     "rdoc/classes/ActiveRecord/Acts/Price.html",
@@ -39,8 +44,35 @@ Gem::Specification.new do |s|
     "rdoc/fr_class_index.html",
     "rdoc/fr_file_index.html",
     "rdoc/fr_method_index.html",
+    "rdoc/images/brick.png",
+    "rdoc/images/brick_link.png",
+    "rdoc/images/bug.png",
+    "rdoc/images/bullet_black.png",
+    "rdoc/images/bullet_toggle_minus.png",
+    "rdoc/images/bullet_toggle_plus.png",
+    "rdoc/images/date.png",
+    "rdoc/images/find.png",
+    "rdoc/images/loadingAnimation.gif",
+    "rdoc/images/macFFBgHack.png",
+    "rdoc/images/package.png",
+    "rdoc/images/page_green.png",
+    "rdoc/images/page_white_text.png",
+    "rdoc/images/page_white_width.png",
+    "rdoc/images/plugin.png",
+    "rdoc/images/ruby.png",
+    "rdoc/images/tag_green.png",
+    "rdoc/images/wrench.png",
+    "rdoc/images/wrench_orange.png",
+    "rdoc/images/zoom.png",
     "rdoc/index.html",
+    "rdoc/js/darkfish.js",
+    "rdoc/js/jquery.js",
+    "rdoc/js/quicksearch.js",
+    "rdoc/js/thickbox-compressed.js",
+    "rdoc/lib/acts_as_price_helper_rb.html",
+    "rdoc/lib/acts_as_price_rb.html",
     "rdoc/rdoc-style.css",
+    "rdoc/rdoc.css",
     "spec/advanced_tests/car_spec.rb",
     "spec/advanced_tests/fueltype_spec.rb",
     "spec/models/car.rb",
@@ -49,58 +81,34 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "uninstall.rb"
   ]
-  s.homepage = %q{http://github.com/jeroeningen/acts_as_price}
+  s.homepage = "http://github.com/jeroeningen/acts_as_price"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{A specified database column acts as a price}
-  s.test_files = [
-    "spec/advanced_tests/car_spec.rb",
-    "spec/advanced_tests/fueltype_spec.rb",
-    "spec/models/car.rb",
-    "spec/models/fueltype.rb",
-    "spec/simple_tests/car_and_fueltype_spec.rb",
-    "spec/spec_helper.rb"
-  ]
+  s.rubygems_version = "1.8.11"
+  s.summary = "A specified database column acts as a price"
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["= 3.0.7"])
-      s.add_runtime_dependency(%q<rake>, ["= 0.8.7"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_runtime_dependency(%q<rails>, ["= 3.0.7"])
-      s.add_development_dependency(%q<rspec-rails>, ["= 2.5.0"])
-      s.add_development_dependency(%q<shoulda-matchers>, ["= 1.0.0.beta2"])
-      s.add_development_dependency(%q<autotest>, ["= 4.4.6"])
-      s.add_development_dependency(%q<rcov>, ["= 0.9.9"])
-      s.add_development_dependency(%q<metrical>, ["= 0.0.5"])
-      s.add_development_dependency(%q<activerecord-nulldb-adapter>, ["= 0.2.1"])
+      s.add_runtime_dependency(%q<rails>, ["> 3.0.7"])
+      s.add_runtime_dependency(%q<rake>, ["> 0.8.7"])
+      s.add_development_dependency(%q<jeweler>, ["> 1.5.2"])
+      s.add_runtime_dependency(%q<rails>, ["> 3.0.7"])
+      s.add_runtime_dependency(%q<rake>, ["> 0.8.7"])
     else
-      s.add_dependency(%q<rails>, ["= 3.0.7"])
-      s.add_dependency(%q<rake>, ["= 0.8.7"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_dependency(%q<rails>, ["= 3.0.7"])
-      s.add_dependency(%q<rspec-rails>, ["= 2.5.0"])
-      s.add_dependency(%q<shoulda-matchers>, ["= 1.0.0.beta2"])
-      s.add_dependency(%q<autotest>, ["= 4.4.6"])
-      s.add_dependency(%q<rcov>, ["= 0.9.9"])
-      s.add_dependency(%q<metrical>, ["= 0.0.5"])
-      s.add_dependency(%q<activerecord-nulldb-adapter>, ["= 0.2.1"])
+      s.add_dependency(%q<rails>, ["> 3.0.7"])
+      s.add_dependency(%q<rake>, ["> 0.8.7"])
+      s.add_dependency(%q<jeweler>, ["> 1.5.2"])
+      s.add_dependency(%q<rails>, ["> 3.0.7"])
+      s.add_dependency(%q<rake>, ["> 0.8.7"])
     end
   else
-    s.add_dependency(%q<rails>, ["= 3.0.7"])
-    s.add_dependency(%q<rake>, ["= 0.8.7"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-    s.add_dependency(%q<rails>, ["= 3.0.7"])
-    s.add_dependency(%q<rspec-rails>, ["= 2.5.0"])
-    s.add_dependency(%q<shoulda-matchers>, ["= 1.0.0.beta2"])
-    s.add_dependency(%q<autotest>, ["= 4.4.6"])
-    s.add_dependency(%q<rcov>, ["= 0.9.9"])
-    s.add_dependency(%q<metrical>, ["= 0.0.5"])
-    s.add_dependency(%q<activerecord-nulldb-adapter>, ["= 0.2.1"])
+    s.add_dependency(%q<rails>, ["> 3.0.7"])
+    s.add_dependency(%q<rake>, ["> 0.8.7"])
+    s.add_dependency(%q<jeweler>, ["> 1.5.2"])
+    s.add_dependency(%q<rails>, ["> 3.0.7"])
+    s.add_dependency(%q<rake>, ["> 0.8.7"])
   end
 end
 
